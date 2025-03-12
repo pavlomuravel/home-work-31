@@ -1,0 +1,11 @@
+# IntellijIdea files
+.idea/
+.DS_Store
+node_modules/
+package-lock.json
+package.json
+gulpfile.js
+CMD.md
+.prettierrc
+.eslintignore
+.csscomb.json
