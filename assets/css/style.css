@@ -74,7 +74,7 @@ main{
       -ms-flex-direction:column;
           flex-direction:column;
   gap:30px;
-  height:900px;
+  margin-top:200px;
 }
 main .search__citi input{
   width:400px;
@@ -130,7 +130,7 @@ main .weather .weather__container .weather__item{
   display:-ms-flexbox;
   display:flex;
   font-weight:bold;
-  gap:10px;
+  gap:15px;
   font-size:15px;
 }
 main .weather .weather__container .weather__text-description{

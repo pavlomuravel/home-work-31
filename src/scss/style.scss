@@ -14,7 +14,7 @@ main {
   align-items: center;
   flex-direction: column;
   gap: 30px;
-  height: 900px;
+  margin-top: 200px;
   .search__citi {
     input {
       width: 400px;
@@ -57,7 +57,7 @@ main {
       .weather__item {
         display: flex;
         font-weight: bold;
-        gap: 10px;
+        gap: 15px;
         font-size: 15px;
       }
       .weather__text-description {

@@ -1,32 +1,28 @@
 
-// #1 За допомогою ajax-запиту вивести погоду
-//
-// http://api.openweathermap.org/data/2.5/weather?q=LVIV&units=metric&APPID=5d066958a60d315387d9492393935c19
-// q=XXX - місто, для якого показати погоду
-
-// Вводимо в інпут назву міста, натискаємо кнопку Погода
-// Якщо таке місто не існує (404), виводимо напис, що таке місце не знайдено
-// Якщо місто існує, виводимо наступну інформацію:
-// temp – температура
-// pressure - тиск
-// description – опис
-// humidity – вологість
-// speed – швидкість вітру
-// deg - напрям у градусах
-// icon - значок, де 10d код іконки (виводимо картинку з таким урлом, як нам повернувся)
-// http://openweathermap.org/img/w/10d.png
-
 document.addEventListener("DOMContentLoaded", function () {
   const apiKey = "5d066958a60d315387d9492393935c19";
   const searchInput = document.getElementById("searchCiti");
   const weatherContainer = document.querySelector(".weather__container");
 
-  searchInput.addEventListener("keypress", function (event) {
-    if (event.key === "Enter") {
-      const city = searchInput.value.trim();
-      if (city) {
-        fetchWeather(city);
+  function debounce(callback, wait) {
+    let timer;
+    return function(...args) {
+      if (timer) {
+        clearTimeout(timer);
       }
+      timer = setTimeout(() => {
+        clearTimeout(timer);
+        callback(...args);
+      }, wait);
+    };
+  }
+
+  const fetchWeatherDebounced = debounce(fetchWeather, 500);
+
+  searchInput.addEventListener("input", function () {
+    const city = searchInput.value.trim();
+    if (city) {
+      fetchWeatherDebounced(city);
     }
   });
 
@@ -67,10 +63,10 @@ document.addEventListener("DOMContentLoaded", function () {
             </div>
             <div class="weather__temp">Температура: ${temp}°C</div>
             <div class="weather__item">
-                <div class="weather__item-pressure">Тиск: ${pressure} гПа</div>
-                <div class="weather__item-humidity">Вологість: ${humidity}%</div>
-                <div class="weather__item-speed">Швидкість вітру: ${windSpeed} м/с</div>
-                <div class="weather__item-deg">Напрям вітру: ${windDeg}°</div>
+                <div class="weather__item-pressure">${pressure} гПа</div>
+                <div class="weather__item-humidity">${humidity}%</div>
+                <div class="weather__item-speed">${windSpeed} м/с</div>
+                <div class="weather__item-deg">${windDeg}°</div>
             </div>
             <div class="weather__text-description">${description}</div>
         `;
